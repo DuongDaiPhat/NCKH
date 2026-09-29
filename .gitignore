@@ -1,0 +1,8 @@
+secrets/
+.env
+config.yaml
+.venv/
+user_data/
+crawled_data/
+__pycache__/
+*.pyc

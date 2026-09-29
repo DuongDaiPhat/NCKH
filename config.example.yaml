@@ -1,0 +1,101 @@
+project:
+  anonymization_salt_env: ANONYMIZATION_SALT
+  min_text_length: 3
+  max_text_length: 10000
+  vietnamese_only: true
+  min_vietnamese_score: 0.12
+  redact_mentions: true
+  redact_urls: true
+  redact_emails: true
+  redact_phones: true
+  store_permalinks: false
+  pseudonymize_object_ids: true
+  store_image_urls: false
+  max_image_urls: 10
+  education_keywords:
+    - hoc
+    - hoc tap
+    - sinh vien
+    - hoc sinh
+    - giang vien
+    - giao vien
+    - mon hoc
+    - bai tap
+    - thi
+    - diem
+    - deadline
+    - do an
+    - khoa
+    - truong
+    - lop
+    - tin chi
+    - hoc phi
+    - tot nghiep
+    - thuc tap
+    - confession
+  education_context_keywords:
+    - truong
+    - dai hoc
+    - cao dang
+    - hoc vien
+    - khoa
+    - lop
+    - sinh vien
+    - hoc sinh
+    - giang vien
+    - giao vien
+    - thay
+    - co
+    - ky tuc xa
+    - ktx
+    - campus
+    - cau lac bo
+    - clb
+    - doan truong
+    - confession truong
+  learning_environment_topics:
+    - tinh yeu
+    - crush
+    - yeu tham
+    - hen ho
+    - chia tay
+    - drama
+    - phot
+    - boc phot
+    - xin loi
+    - dinh chinh
+    - mau thuan
+    - cai nhau
+    - bat nat
+    - bao luc hoc duong
+    - quay roi
+    - ap luc
+    - stress
+    - tram cam
+    - co lap
+    - ban be
+    - roommate
+    - mat do
+    - lua dao
+
+crawl:
+  target_per_topic: 500
+  headless: false
+  min_delay_seconds: 3.0
+  max_delay_seconds: 6.0
+  max_actions_per_minute: 12
+  navigation_timeout_ms: 60000
+  max_search_scrolls: 80
+  stop_after_empty_scrolls: 8
+  max_posts_per_keyword: 200
+  max_comments_per_post: 100
+  max_reply_expand_clicks: 12
+  output_dir: crawled_data
+
+google_sheets:
+  enabled: true
+  spreadsheet_id: THAY_MA_GOOGLE_SHEET_VAO_DAY
+  worksheet: raw_data
+  service_account_file_env: GOOGLE_SERVICE_ACCOUNT_FILE
+  service_account_json_env: GOOGLE_SERVICE_ACCOUNT_JSON
+  batch_size: 200
