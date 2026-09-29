@@ -6,10 +6,10 @@ Bốn em dùng cùng mã ẩn danh do người điều phối cung cấp và cù
 
 | Người | File cấu hình | Tab Google Sheet | Dữ liệu dự phòng |
 |---|---|---|---|
-| Người 1 – Học tập cơ bản | `configs/config_nguoi_1.yaml` | `nguoi_1_hoc_tap` | `crawled_data/nguoi_1` |
-| Người 2 – Thi cử và học phí | `configs/config_nguoi_2.yaml` | `nguoi_2_thi_cu` | `crawled_data/nguoi_2` |
-| Người 3 – Môi trường học đường | `configs/config_nguoi_3.yaml` | `nguoi_3_moi_truong` | `crawled_data/nguoi_3` |
-| Người 4 – Đời sống/tâm lý | `configs/config_nguoi_4.yaml` | `nguoi_4_doi_song` | `crawled_data/nguoi_4` |
+| Người 1 – Học tập cơ bản | `configs/config_Giang.yaml` | `Giang_hoc_tap` | `crawled_data/Giang` |
+| Người 2 – Thi cử và học phí | `configs/config_Phuc.yaml` | `Phuc_thi_cu` | `crawled_data/Phuc` |
+| Người 3 – Môi trường học đường | `configs/config_Dong.yaml` | `Dong_moi_truong` | `crawled_data/Dong` |
+| Người 4 – Đời sống/tâm lý | `configs/config_Tam.yaml` | `Tam_doi_song` | `crawled_data/Tam` |
 
 Các tab chưa tồn tại sẽ được chương trình tự tạo theo cùng cấu trúc nghiên cứu 19 cột, định dạng nền trắng chữ đen và đặt đúng hàng tiêu đề. Nhờ cùng cấu trúc, người điều phối có thể gộp bốn tab sau này mà không cần đổi tên cột.
 

@@ -77,9 +77,9 @@ class TextCleaningTests(unittest.TestCase):
     def test_assigned_topics_override_default_taxonomy(self):
         topics = education_search_topics(
             DEFAULT_CONFIG["project"],
-            {"assigned_topics": {"Nguoi_3": ["dai hoc", "trọ", "trọ"]}},
+            {"assigned_topics": {"Dong": ["dai hoc", "trọ", "trọ"]}},
         )
-        self.assertEqual(topics, {"Nguoi_3": ["dai hoc", "trọ"]})
+        self.assertEqual(topics, {"Dong": ["dai hoc", "trọ"]})
 
     def test_keeps_emoji_and_zwj(self):
         text = "  Xin chào   👨‍👩‍👧‍👦  \r\n  Việt Nam 🇻🇳  "
