@@ -40,25 +40,14 @@ Nhấp đúp `setup_windows.bat`. Cửa sổ sẽ tự cài các thư viện và
 
 Nếu cửa sổ báo không tìm thấy lệnh `py`, hãy khởi động lại máy sau khi cài Python rồi thử lại.
 
-### 3. Chuẩn bị Google Sheet
 
-1. Tạo một Google Sheet mới. Tab có thể để tên `raw_data`; nếu chưa có, chương trình sẽ tự tạo.
-2. Trong Google Cloud, tạo một **Service Account**, bật **Google Sheets API** và **Google Drive API**, sau đó tạo khóa dạng **JSON**.
-3. Tạo thư mục `secrets` trong thư mục dự án và đặt file khóa vào đó với tên `google-service-account.json`.
-4. Mở file JSON bằng Notepad, sao chép địa chỉ ở dòng `client_email`.
-5. Quay lại Google Sheet, bấm **Chia sẻ**, dán địa chỉ đó và cấp quyền **Người chỉnh sửa**.
-6. Lấy mã Sheet từ địa chỉ trên trình duyệt. Ví dụ, với địa chỉ `https://docs.google.com/spreadsheets/d/ABC123/edit`, mã cần lấy là `ABC123`.
+### 3. Điền cấu hình
 
-Không gửi file khóa JSON cho người khác và không đưa file đó lên GitHub. Thư mục `secrets` đã được cấu hình để không bị Git theo dõi.
+Dự án hiện đã có `config.yaml` (theo từng người) và `.env`. Khi cài ở máy mới mà chưa có hai file này:
 
-### 4. Điền cấu hình
-
-Dự án hiện đã có `config.yaml` và `.env`. Khi cài ở máy mới mà chưa có hai file này:
-
-1. Sao chép `config.example.yaml`, đổi tên bản sao thành `config.yaml`.
-2. Sao chép `.env.example`, đổi tên bản sao thành `.env`.
-3. Trong `config.yaml`, thay `THAY_MA_GOOGLE_SHEET_VAO_DAY` bằng mã Sheet ở bước trên.
-4. Trong `.env`, thay `THAY_BANG_CHUOI_NGAU_NHIEN_DAI` bằng một chuỗi bí mật dài do bạn tự đặt. Giữ nguyên chuỗi này giữa các lần chạy để chức năng chống trùng hoạt động.
+1. Tạo thư mục mới "configs" ở root Bỏ file config anh gửi từ zalo vào.
+2. Sao chép `.env.example`, đổi tên bản sao thành `.env`. Và thay cấu hình anh gửi ở Zalo
+3. Tạo thư mục "secrets" ở root bỏ file nckh2627-ce003a8221f1.json vào thư mục đó
 
 Không thêm dấu ngoặc kép quanh các giá trị trong `.env`.
 
@@ -88,49 +77,5 @@ Thiết lập mặc định chờ 3–6 giây và không quá 12 thao tác/phút
 
 Crawler chỉ dùng ba danh sách giáo dục nói trên. Các nhóm kinh tế, xã hội tổng quát, công nghệ và môi trường không còn được tìm kiếm.
 
-## Chống trùng và khôi phục lỗi
 
-Chương trình chống trùng ở hai lớp:
 
-1. Mỗi nội dung có `ma_du_lieu` ổn định, tạo từ URL chuẩn hóa và khóa bí mật trong `.env`.
-2. Trước khi ghi, chương trình đọc cột mã chống trùng (`ma_du_lieu` hoặc `content_hash`) của Google Sheet và chỉ thêm mã chưa tồn tại.
-
-Nếu mạng hoặc Google Sheets tạm lỗi, bản JSONL ở máy vẫn còn. Chỉ cần chạy lại; chương trình sẽ bù các dòng còn thiếu trước khi cào mới. Không xóa thư mục `crawled_data` và không đổi `ANONYMIZATION_SALT` nếu muốn tiếp tục cùng một bộ dữ liệu.
-
-## Lỗi thường gặp
-
-**“Không tìm thấy khóa Google”**
-
-Kiểm tra file có đúng tại `secrets/google-service-account.json` và `.env` có dòng `GOOGLE_SERVICE_ACCOUNT_FILE=secrets/google-service-account.json`.
-
-**“Tab có cấu trúc chưa được hỗ trợ”**
-
-Tab được chọn đang chứa bảng khác. Tạo tab trống mới rồi đổi `worksheet` trong `config.yaml` sang tên tab mới.
-
-**“PERMISSION_DENIED” hoặc “Spreadsheet not found”**
-
-Google Sheet chưa được chia sẻ quyền chỉnh sửa cho đúng `client_email` của Service Account, hoặc mã `spreadsheet_id` chưa đúng.
-
-**Không thấy bài hoặc bình luận**
-
-Kiểm tra đã đăng nhập Threads, thử từ khóa khác và cập nhật Playwright bằng cách chạy lại `setup_windows.bat`. Threads có thể thay đổi giao diện; khi đó cần người phụ trách kỹ thuật cập nhật hai selector trong `B1_NLP/crawl.py`.
-
-**Muốn thử mà chưa kết nối Google Sheets**
-
-Mở PowerShell trong thư mục dự án và chạy `.venv\Scripts\python.exe B1_NLP\crawl.py --no-sheets`. Dữ liệu chỉ được lưu tại máy.
-
-## Dành cho người phụ trách kỹ thuật
-
-Kiểm tra nhanh phần làm sạch và chống trùng mà không truy cập Threads:
-
-```powershell
-python -m unittest discover -s tests -v
-```
-
-Cấu trúc chính:
-
-- `B1_NLP/crawl.py`: crawler, làm sạch, ẩn danh, lưu JSONL và đồng bộ Sheets.
-- `config.yaml`: cấu hình đang dùng; không được Git theo dõi vì có mã Sheet.
-- `config.example.yaml`: cấu hình mẫu an toàn để chia sẻ.
-- `.env`: khóa ẩn danh và đường dẫn khóa Google; tuyệt đối không chia sẻ.
-- `crawled_data/threads_records.jsonl`: bản dự phòng UTF-8, giữ nguyên emoji.
