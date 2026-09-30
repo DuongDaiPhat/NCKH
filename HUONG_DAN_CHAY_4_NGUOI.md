@@ -16,7 +16,7 @@ Các tab chưa tồn tại sẽ được chương trình tự tạo theo cùng c
 ## Chuẩn bị trên từng máy
 
 1. Sao chép toàn bộ thư mục dự án sang máy của từng người.
-2. Nhấp đúp `setup_windows.bat` và đợi thông báo cài đặt thành công.
+2. Nhấp đúp `setup_windows.bat` và đợi thông báo cài đặt thành công. (Nếu bị mất mạng hoặc báo lỗi cài đặt dở dang, chỉ cần nhấp đúp file `reset.bat` để dọn dẹp rồi chạy lại `setup_windows.bat`).
 3. Đặt file khóa Google Service Account vào thư mục `secrets`.
 4. Tạo file `.env` từ `.env.example`.
 5. Trong `.env`, đặt `ANONYMIZATION_SALT` bằng đúng mã chung do anh gửi trong Zalo. Cả bốn máy phải giống nhau tuyệt đối; không thêm khoảng trắng hoặc dấu ngoặc.
